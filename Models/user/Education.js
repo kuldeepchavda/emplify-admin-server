@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+
 const educationSchema = new mongoose.Schema(
     {
         userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
@@ -12,4 +13,4 @@ const educationSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
-module.exports = mongoose.model("Education", educationSchema);
+module.exports = mongoose.model(process.env.EDUCATION_DATABASE, educationSchema);

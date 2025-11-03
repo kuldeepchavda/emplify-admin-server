@@ -14,6 +14,6 @@ const adminSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model("admin_testing_1", adminSchema);
+const User = mongoose.model(process.env.ADMIN_DATABASE, adminSchema);
 
 module.exports = User;

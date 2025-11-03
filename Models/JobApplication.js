@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Education = require("../Models/user/Education");
 
 const JobApplication = mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
@@ -28,4 +27,4 @@ const JobApplication = mongoose.Schema({
     { timestamps: true })
 
 
-    module.exports = mongoose.model("testing_application1", JobApplication)
+    module.exports = mongoose.model(process.env.JOB_APPLICATION_DATABASE, JobApplication)

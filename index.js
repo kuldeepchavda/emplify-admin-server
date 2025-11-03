@@ -5,7 +5,6 @@ const passport = require("passport");
 const cookieParser = require("cookie-parser");
 // ROUTES
 const adminAuthRoutes = require("./routes/admin.authenticate.routes.js")
-const userAuthRoutes = require("./routes/user.authentication.routes.js")
 const jobRoutes = require("./routes/jobs.routes.js");
 const ExperienceRoutes = require("./routes/users.routers/experience.router.js")
 const {validateSessions} = require("./middleware/checkSessions.js");
@@ -34,7 +33,6 @@ app.use(passport.initialize());
 
 // ROUTES 
 app.use("/auth/admin", adminAuthRoutes); 
-app.use("/auth/user", userAuthRoutes);
 app.use(validateSessions);
 app.use("/user",userRoutes);
 app.use("/job", jobRoutes);

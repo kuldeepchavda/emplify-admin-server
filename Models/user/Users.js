@@ -9,12 +9,16 @@ const UserSchema = new mongoose.Schema({
   skills: [{ type: String }],
   resumeUrl: { type: String },
   portfolioUrl: { type: String },
-  password: { type: String, required:true }
+  password: { type: String, required: true }
 },
-  { timestamps: true });
+  {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+  });
 
-UserSchema.virtual("completeProfile").get(function (){
-  return this.fullName && this.email && this.phone ? true : false ;
+UserSchema.virtual("completeProfile").get(function () {
+  return this.fullName && this.email && this.phone ? true : false;
 })
 
-module.exports = mongoose.model("User_testing432", UserSchema);
+module.exports = mongoose.model(process.env.USERS_DATABASE, UserSchema);

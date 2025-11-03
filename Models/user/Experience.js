@@ -13,4 +13,4 @@ const experienceSchema = mongoose.Schema(
     { timestamps: true }
 )
 
-module.exports = mongoose.model("exp_testing_2", experienceSchema);
+module.exports = mongoose.model(process.env.EXPERIENCE_DATABASE, experienceSchema);

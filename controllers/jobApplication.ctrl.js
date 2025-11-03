@@ -4,7 +4,6 @@ const Education = require("../Models/user/Education")
 const Experience = require("../Models/user/Experience")
 const Application = require("../Models/JobApplication")
 
-
 exports.applyForJob = async (req, res) => {
     try {
         const { jobId } = req.body;

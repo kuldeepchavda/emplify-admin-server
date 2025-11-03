@@ -17,7 +17,7 @@ router.route("/signup").post(async (req, res, next) => {
       return res.status(501).json({ "message": info.message })
     }
     const generatedToken = getJWT({ email: user.email, _id: user._id })
-    res.cookie("token", generatedToken, {
+    res.cookie("admin_token", generatedToken, {
   httpOnly: false,
   secure: true,            // only HTTPS
   sameSite: "none",      // allow cross-site
@@ -40,7 +40,7 @@ router.route("/login").post(async (req, res, next) => {
     }
 
 
-    res.cookie("token", getJWT({ email: user.email, _id: user._id }), {
+    res.cookie("admin_token", getJWT({ email: user.email, _id: user._id }), {
   httpOnly: false,
   secure: true,       // only HTTPS
   sameSite: "none",      // allow cross-site
@@ -56,7 +56,7 @@ router.route("/login").post(async (req, res, next) => {
 
 router.route("/logout").get( (req, res) => {
   try {
-    res.clearCookie("token")
+    res.clearCookie("admin_token")
     res.status(201).json({ message: "Logged out successfully." })
   } catch (error) {
     console.log(error.message)
