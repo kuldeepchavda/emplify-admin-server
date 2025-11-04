@@ -46,7 +46,7 @@ router.route("/login").post(async (req, res, next) => {
       httpOnly: true,
       secure: true,
       sameSite: "none", // cross-subdomain allowed
-      domain: ".kuldeepchavda.in", // important — note the leading dot
+      // domain: ".kuldeepchavda.in", // important — note the leading dot
       maxAge: 1000 * 60 * 60 // 1h
     });
 
