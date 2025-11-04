@@ -4,6 +4,7 @@ exports.createJob = async (req, res) => {
   try {
     const job = new Job(req.body);
     await job.save();
+
     res.status(201).json({ success: true, data: job });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
@@ -12,8 +13,11 @@ exports.createJob = async (req, res) => {
 
 exports.getJobs = async (req, res) => {
   try {
+    console.log("Job",1);
     const jobs = await Job.find();
+    console.log("Job",2);
     const jobCounts = await Job.countDocuments();
+    console.log("Job",3);
     res.status(200).json({ success: true, data: { jobs, counts: jobCounts } });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
