@@ -39,13 +39,16 @@ router.route("/login").post(async (req, res, next) => {
       return res.status(400).json({ success: false, message: info.message });
     }
 
+    const generatedToken = getJWT({ email: user.email, _id: user._id })
 
-    res.cookie("admin_token", getJWT({ email: user.email, _id: user._id }), {
-   httpOnly: true,
-  secure: true,            // only HTTPS
-  sameSite: "none",      // allow cross-site
-  maxAge: 1000 * 60 * 60 // 1h
-})
+  res.cookie("admin_token", generatedToken, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  domain: ".vercel.com",
+  maxAge: 1000 * 60 * 60
+});
+
     res.status(201).json({ message: "Logged in" });
 
 
