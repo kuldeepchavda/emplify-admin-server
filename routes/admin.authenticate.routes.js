@@ -1,12 +1,12 @@
 const express = require("express")
 const passPortConfig = require("../config/passPortConfig.js")
-const {validateSessions, verifySessions}  = require("../middleware/checkSessions.js")
+const { validateSessions, verifySessions } = require("../middleware/checkSessions.js")
 const router = express.Router()
 const passport = require("passport")
 const { getJWT } = require("../config/JWT_opetations.js")
 
 router.route("/signup").post(async (req, res, next) => {
-  passport.authenticate("admin_signup", (err, user, info) => { 
+  passport.authenticate("admin_signup", (err, user, info) => {
     if (err) {
       console.log("Got an error while signing up.");
       console.log(1)
@@ -18,11 +18,12 @@ router.route("/signup").post(async (req, res, next) => {
     }
     const generatedToken = getJWT({ email: user.email, _id: user._id })
     res.cookie("admin_token", generatedToken, {
-  httpOnly: true,
-  secure: true,            // only HTTPS
-  sameSite: "none",      // allow cross-site
-  maxAge: 1000 * 60 * 60 // 1h
-})
+      httpOnly: true,
+      secure: true,
+      sameSite: "none", // cross-subdomain allowed
+      domain: ".kuldeepchavda.in", // important — note the leading dot
+      maxAge: 1000 * 60 * 60 // 1h
+    });
     res.status(201).json({ message: "Signed up." })
   })(req, res, next);
 });
@@ -41,13 +42,13 @@ router.route("/login").post(async (req, res, next) => {
 
     const generatedToken = getJWT({ email: user.email, _id: user._id })
 
-  res.cookie("admin_token", generatedToken, {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  domain: ".vercel.app",
-  maxAge: 1000 * 60 * 60
-});
+    res.cookie("admin_token", generatedToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none", // cross-subdomain allowed
+      domain: ".kuldeepchavda.in", // important — note the leading dot
+      maxAge: 1000 * 60 * 60 // 1h
+    });
 
     res.status(201).json({ message: "Logged in" });
 
@@ -55,9 +56,9 @@ router.route("/login").post(async (req, res, next) => {
   })(req, res, next);
 })
 
- 
 
-router.route("/logout").get( (req, res) => {
+
+router.route("/logout").get((req, res) => {
   try {
     res.clearCookie("admin_token")
     res.status(201).json({ message: "Logged out successfully." })
