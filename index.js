@@ -14,6 +14,7 @@ const JobApplicationRoutes = require("./routes/jobApplication.router.js")
 // APP INITIATION 
 const app = express()
 
+console.log(2)
 //MIDDLEWARE
 const corsOptions = {
   origin: [
@@ -27,11 +28,17 @@ const corsOptions = {
     "https://placement-main.vercel.app"],
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     credentials: true,
-};
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
-app.use(express.json());
-app.use(cookieParser());
+  };
+  console.log(1)
+  app.use(cors(corsOptions));
+  console.log(3)
+  // app.options("*", cors(corsOptions));
+  console.log(4)
+  app.use(express.json());
+  console.log(5)
+  app.use(cookieParser());
+  console.log(6)
+  console.log(7)
 
 
 require("./config/DatabaseConfig")();
@@ -55,11 +62,3 @@ const port = 5000;
 app.listen(port, () => {
   console.log(`Server running at ${process.env.PORT}.`)
 });
-
-console.log(1)
-console.log(2)
-console.log(3)
-console.log(4)
-console.log(5)
-console.log(6)
-console.log(7)
