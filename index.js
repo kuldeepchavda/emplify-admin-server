@@ -15,8 +15,6 @@ const JobApplicationRoutes = require("./routes/jobApplication.router.js")
 const app = express()
 
 //MIDDLEWARE
-app.use(express.json());
-app.use(cookieParser());
 const corsOptions = {
   origin: [
     // local 
@@ -27,10 +25,13 @@ const corsOptions = {
     'https://testing.kuldeepchavda.in',
     'https://placement-frontend-3sp7.onrender.com',
     "https://placement-main.vercel.app"],
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  credentials: true,
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    credentials: true,
 };
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+app.use(express.json());
+app.use(cookieParser());
 
 
 require("./config/DatabaseConfig")();
