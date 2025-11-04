@@ -45,7 +45,7 @@ router.route("/login").post(async (req, res, next) => {
   httpOnly: true,
   secure: true,
   sameSite: "none",
-  domain: ".vercel.com",
+  domain: ".vercel.app",
   maxAge: 1000 * 60 * 60
 });
 
